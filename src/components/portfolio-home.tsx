@@ -92,25 +92,27 @@ function Hero() {
     <section aria-labelledby="portfolio-heading" className="portfolio-hero">
       <div className="portfolio-hero__cover">
         <p className="portfolio-hero__discipline">(ui/ux design)</p>
-        <div className="portfolio-hero__name">Intan</div>
-        <p className="portfolio-hero__wordmark" id="portfolio-heading">
-          <span className="portfolio-hero__script">P</span>
-          <span>ort</span>
-          <span className="portfolio-hero__script">f</span>
-          <span>ol</span>
-          <span className="portfolio-hero__accent">io</span>
-        </p>
+        <div className="portfolio-hero__lockup">
+          <div className="portfolio-hero__name">Intan</div>
+          <p className="portfolio-hero__wordmark" id="portfolio-heading">
+            <span className="portfolio-hero__script">P</span>
+            <span>ort</span>
+            <span className="portfolio-hero__script">f</span>
+            <span>ol</span>
+            <span className="portfolio-hero__accent">io</span>
+          </p>
+          <Image
+            alt=""
+            aria-hidden="true"
+            className="portfolio-hero__icon"
+            src={assets.heroIcon}
+            width={88}
+            height={91}
+          />
+        </div>
         <div className="portfolio-hero__date">
           <span>2026</span>
         </div>
-        <Image
-          alt=""
-          aria-hidden="true"
-          className="portfolio-hero__icon"
-          src={assets.heroIcon}
-          width={88}
-          height={91}
-        />
       </div>
       <div className="portfolio-hero__image">
         <Image

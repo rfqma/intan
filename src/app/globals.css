@@ -117,7 +117,6 @@ button {
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  max-width: 1440px;
   min-height: 717px;
   margin: 0 auto;
   padding: 72px max(24px, calc((100% - 534px) / 2)) 0;
@@ -149,9 +148,18 @@ button {
   left: 0;
 }
 
+.portfolio-hero__lockup {
+  --wordmark-size: 112px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+}
+
 .portfolio-hero__name {
-  top: 96px;
-  left: 77.34%;
+  z-index: 2;
+  top: calc(var(--wordmark-size) * 0.857);
+  left: calc(100% - var(--wordmark-size) * 0.03);
   padding: 4px;
   background: #ffffff;
 }
@@ -229,10 +237,7 @@ button {
 }
 
 .portfolio-hero__wordmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 447px;
+  position: relative;
   height: 203px;
   margin: 0;
   font-family: "Telugu Sangam MN", Georgia, "Times New Roman", serif;
@@ -243,14 +248,14 @@ button {
 }
 
 .portfolio-hero__wordmark > span:not(.portfolio-hero__script) {
-  font-size: 112px;
+  font-size: var(--wordmark-size);
   line-height: normal;
 }
 
 .portfolio-hero__script {
   color: var(--portfolio-orange);
   font-family: var(--font-italianno), "Brush Script MT", cursive;
-  font-size: 172px;
+  font-size: calc(var(--wordmark-size) * 1.536);
   font-weight: 400;
   line-height: normal;
 }
@@ -262,8 +267,8 @@ button {
 .portfolio-hero__icon {
   position: absolute;
   z-index: 1;
-  top: 111px;
-  left: 81.84%;
+  top: calc(var(--wordmark-size) * 0.991);
+  left: calc(100% - var(--wordmark-size) * 0.3);
   width: 86px;
   height: 90px;
   object-fit: contain;
@@ -274,7 +279,7 @@ button {
   width: 100%;
   max-width: 534px;
   min-width: 320px;
-  height: 420px;
+  aspect-ratio: 800 / 632;
   flex-shrink: 0;
 }
 
@@ -285,11 +290,19 @@ button {
   object-fit: cover;
 }
 
+@media (max-width: 582px) {
+  .portfolio-hero__image {
+    width: min(100vw, 534px);
+    max-width: none;
+    min-width: 0;
+    margin-left: calc((100% - min(100vw, 534px)) / 2);
+  }
+}
+
 .portfolio-about {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1440px;
   min-height: 891px;
   margin: 0 auto;
   isolation: isolate;
@@ -325,10 +338,10 @@ button {
   align-items: center;
   gap: 96px;
   width: 100%;
-  max-width: 1440px;
   height: 782px;
   margin: 0 auto;
-  padding: 32px 72px;
+  /* Full-bleed panel; keep the 1296px content centered on wide screens. */
+  padding: 32px max(72px, calc((100% - 1296px) / 2));
   overflow: hidden;
   border-radius: 30px 30px 0 0;
   background: linear-gradient(
@@ -955,7 +968,16 @@ button {
   width: 100%;
   height: 810px;
   overflow: hidden;
-  background: var(--portfolio-dark-brown);
+  /* Shows through the transparent folder-tab cutout at the top of the
+     background image, continuing the About panel above. */
+  background:
+    linear-gradient(
+      270deg,
+      #311f18 0%,
+      rgb(40 19 13 / 90%) 55.682%,
+      rgb(11 10 10 / 80%) 99.94%
+    ),
+    var(--portfolio-about-shape);
 }
 
 .portfolio-work__background {
@@ -965,6 +987,7 @@ button {
   width: 100%;
   height: 810px;
   object-fit: cover;
+  object-position: top center;
 }
 
 .portfolio-work__heading {
@@ -3161,21 +3184,12 @@ button {
     height: 190px;
   }
 
-  .portfolio-hero__wordmark {
-    width: 100%;
-  }
-
-  .portfolio-hero__wordmark > span:not(.portfolio-hero__script) {
-    font-size: clamp(68px, 21vw, 112px);
-  }
-
-  .portfolio-hero__script {
-    font-size: clamp(104px, 32vw, 172px);
+  .portfolio-hero__lockup {
+    /* Leave room for the folder icon after the last "o". */
+    --wordmark-size: clamp(52px, calc((100vw - 112px) / 3.7), 112px);
   }
 
   .portfolio-hero__name {
-    top: 82px;
-    left: 77.34%;
     font-size: 12px;
   }
 
@@ -3190,14 +3204,8 @@ button {
   }
 
   .portfolio-hero__icon {
-    top: 98px;
-    left: 81.84%;
     width: 64px;
     height: 68px;
-  }
-
-  .portfolio-hero__image {
-    height: 350px;
   }
 
   .portfolio-about {
